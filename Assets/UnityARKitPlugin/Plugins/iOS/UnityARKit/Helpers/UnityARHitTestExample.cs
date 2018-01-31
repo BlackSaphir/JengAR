@@ -6,25 +6,34 @@ namespace UnityEngine.XR.iOS
 	public class UnityARHitTestExample : MonoBehaviour
 	{
 		public Transform m_HitTransform;
+		public GameObject CubePrefab;
 		public float maxRayDistance = 30.0f;
 		public LayerMask collisionLayer = 1 << 10;  //ARKitPlane layer
+		GameObject temp;
 
         bool HitTestWithResultType (ARPoint point, ARHitTestResultType resultTypes)
-        {
-            List<ARHitTestResult> hitResults = UnityARSessionNativeInterface.GetARSessionNativeInterface ().HitTest (point, resultTypes);
-            if (hitResults.Count > 0)
-            {
-                foreach (var hitResult in hitResults) {
-                    Debug.Log ("Got hit!");
-                    m_HitTransform.position = UnityARMatrixOps.GetPosition (hitResult.worldTransform);
-                    m_HitTransform.rotation = UnityARMatrixOps.GetRotation (hitResult.worldTransform);
-                    Debug.Log (string.Format ("x:{0:0.######} y:{1:0.######} z:{2:0.######}", m_HitTransform.position.x, m_HitTransform.position.y, m_HitTransform.position.z));
-                    return true;
-                }
-            }
-            return false;
-        }
-		
+		{
+			List<ARHitTestResult> hitResults = UnityARSessionNativeInterface.GetARSessionNativeInterface ().HitTest (point, resultTypes);
+			if (hitResults.Count > 0) 
+			{
+				foreach (var hitResult in hitResults) 
+				{
+					if (temp != null) 
+					{
+						Destroy(temp);					
+					}
+					temp = Instantiate (CubePrefab);					
+					Debug.Log ("Got hit!");						
+					m_HitTransform.position = UnityARMatrixOps.GetPosition (hitResult.worldTransform);
+					m_HitTransform.rotation = UnityARMatrixOps.GetRotation (hitResult.worldTransform);
+					temp.transform.position = m_HitTransform.position;
+					temp.transform.rotation = m_HitTransform.rotation;
+					Debug.Log (string.Format ("x:{0:0.######} y:{1:0.######} z:{2:0.######}", m_HitTransform.position.x, m_HitTransform.position.y, m_HitTransform.position.z));
+					return true;
+					
+				}
+			}
+			return false;		}		
 		// Update is called once per frame
 		void Update () {
 			#if UNITY_EDITOR   //we will only use this script on the editor side, though there is nothing that would prevent it from working on device
