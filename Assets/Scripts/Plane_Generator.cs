@@ -8,7 +8,7 @@ namespace UnityEngine.XR.iOS
     {
 
         public GameObject planePrefab;
-        public GameObject Tower;
+        //public GameObject Spawner;
         private UnityARAnchorManager unityARAnchorManager;
 
         // Use this for initialization
@@ -16,13 +16,29 @@ namespace UnityEngine.XR.iOS
         {
             unityARAnchorManager = new UnityARAnchorManager();
             UnityARUtility.InitializePlanePrefab(planePrefab);
-            Instantiate(Tower, new Vector3(planePrefab.transform.position.x / 2, planePrefab.transform.position.y, planePrefab.transform.position.z / 2), planePrefab.transform.rotation);
         }
 
         void Update()
         {
-            Tower.transform.position = new Vector3(planePrefab.transform.position.x / 2, planePrefab.transform.position.y, planePrefab.transform.position.z / 2);
-            Tower.transform.rotation = Quaternion.Euler(planePrefab.transform.rotation.x, planePrefab.transform.rotation.y, planePrefab.transform.rotation.z);
+            //if (UnityARUtility.planePrefab != null && Spawner == null)
+            //{
+            //    Instantiate(Spawner, new Vector3(planePrefab.transform.position.x / 2, planePrefab.transform.position.y, planePrefab.transform.position.z / 2), planePrefab.transform.rotation);
+            //}
+            //else if (UnityARUtility.planePrefab == null && Spawner != null)
+            //{
+            //    Destroy(Spawner);
+            //}
+
+            //if (Spawner != null)
+            //{
+            //    Spawner.transform.position = new Vector3(planePrefab.transform.position.x / 2, planePrefab.transform.position.y, planePrefab.transform.position.z / 2);
+            //    Spawner.transform.rotation = Quaternion.Euler(planePrefab.transform.rotation.x, planePrefab.transform.rotation.y, planePrefab.transform.rotation.z);
+            //}
+        }
+
+        public static void Generate_Tower()
+        {
+
         }
 
         void OnDestroy()

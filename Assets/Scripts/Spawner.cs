@@ -2,66 +2,60 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Spawner : MonoBehaviour
+
+namespace UnityEngine.XR.iOS
 {
-    public GameObject Cube;
-
-    public Vector3 Intialize;
-
-    public Vector3 Intialize_Turnaround;
-
-    public float Delta;
-
-    bool turnaround;
-
-    // Use this for initialization
-    void Start()
+    public class Spawner : MonoBehaviour
     {
+        public GameObject JengaCube;
 
+        public Vector3 Intialize;
 
-        for (int j = 0; j < 20; j++)
+        public Vector3 Intialize_Turnaround;
+
+        public float Delta;
+
+        bool turnaround;
+
+        public void Build()
         {
 
-            for (int i = 0; i < 3; i++)
+            for (int j = 0; j < 20; j++)
             {
-                if (turnaround == false)
+
+                for (int i = 0; i < 3; i++)
                 {
-                    GameObject temp = Instantiate(Cube);
-                    temp.transform.position = Intialize + Vector3.right * i * Delta;
-                    temp.transform.rotation = Quaternion.identity;
-                }
-                else
-                {
-                    GameObject temp = Instantiate(Cube);
-                    temp.transform.position = Intialize_Turnaround + Vector3.forward * i * Delta;
-                    temp.transform.rotation = Quaternion.Euler(0, 90, 0);
-                }
-                if (i == 2)
-                {
-                    if (turnaround == true)
+                    if (turnaround == false)
                     {
-
-
-                        turnaround = false;
-
+                        GameObject temp = Instantiate(JengaCube);
+                        temp.transform.position = Intialize + Vector3.right * i * Delta;
+                        temp.transform.rotation = Quaternion.identity;
                     }
                     else
                     {
-                        turnaround = true;
+                        GameObject temp = Instantiate(JengaCube);
+                        temp.transform.position = Intialize_Turnaround + Vector3.forward * i * Delta;
+                        temp.transform.rotation = Quaternion.Euler(0, 90, 0);
+                    }
+                    if (i == 2)
+                    {
+                        if (turnaround == true)
+                        {
+
+
+                            turnaround = false;
+
+                        }
+                        else
+                        {
+                            turnaround = true;
+                        }
                     }
                 }
+
+                Intialize.y += .15f;
+                Intialize_Turnaround.y += .15f;
             }
-
-            Intialize.y += 1.5f;
-            Intialize_Turnaround.y += 1.5f;
-
-
         }
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
     }
 }

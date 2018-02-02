@@ -54,7 +54,8 @@ namespace UnityEngine.XR.iOS
 				if (touch.phase == TouchPhase.Began || touch.phase == TouchPhase.Moved)
 				{
 					var screenPosition = Camera.main.ScreenToViewportPoint(touch.position);
-					ARPoint point = new ARPoint {
+					ARPoint point = new ARPoint 
+                    {
 						x = screenPosition.x,
 						y = screenPosition.y
 					};
@@ -63,9 +64,9 @@ namespace UnityEngine.XR.iOS
                     ARHitTestResultType[] resultTypes = {
                         ARHitTestResultType.ARHitTestResultTypeExistingPlaneUsingExtent, 
                         // if you want to use infinite planes use this:
-                        //ARHitTestResultType.ARHitTestResultTypeExistingPlane,
-                        ARHitTestResultType.ARHitTestResultTypeHorizontalPlane, 
-                        ARHitTestResultType.ARHitTestResultTypeFeaturePoint
+                        ARHitTestResultType.ARHitTestResultTypeExistingPlane,
+                        //ARHitTestResultType.ARHitTestResultTypeHorizontalPlane, 
+                        //ARHitTestResultType.ARHitTestResultTypeFeaturePoint
                     }; 
 					
                     foreach (ARHitTestResultType resultType in resultTypes)

@@ -1,10 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 
 namespace UnityEngine.XR.iOS
 {
-	public class UnityARAnchorManager 
+    public class UnityARAnchorManager 
 	{
 
 
