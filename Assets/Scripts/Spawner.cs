@@ -17,6 +17,8 @@ namespace UnityEngine.XR.iOS
 
         bool turnaround;
 
+
+
         public void Build()
         {
 
@@ -30,12 +32,15 @@ namespace UnityEngine.XR.iOS
                         GameObject temp = Instantiate(JengaCube);
                         temp.transform.position = Intialize + Vector3.right * i * Delta;
                         temp.transform.rotation = Quaternion.identity;
+                        temp.AddComponent<Rigidbody>();
                     }
                     else
                     {
                         GameObject temp = Instantiate(JengaCube);
                         temp.transform.position = Intialize_Turnaround + Vector3.forward * i * Delta;
                         temp.transform.rotation = Quaternion.Euler(0, 90, 0);
+                        temp.AddComponent<Rigidbody>();
+
                     }
                     if (i == 2)
                     {
