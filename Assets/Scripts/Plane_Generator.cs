@@ -16,6 +16,7 @@ namespace UnityEngine.XR.iOS
         {
             unityARAnchorManager = new UnityARAnchorManager();
             UnityARUtility.InitializePlanePrefab(planePrefab);
+
         }
 
         void Update()

@@ -54,4 +54,3 @@ MonoBehaviour:
   JengaCube: {fileID: 1627307516304200, guid: fddf83d3e49356e40a9a4949651154cb, type: 2}
   Intialize: {x: 0, y: 0, z: 0}
   Intialize_Turnaround: {x: 0, y: 0, z: 0}
-  Delta: 0.255

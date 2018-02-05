@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using UnityEngine.EventSystems;
 
 namespace UnityEngine.XR.iOS
 {
@@ -31,9 +32,9 @@ namespace UnityEngine.XR.iOS
                     temp.GetComponent<Spawner>().Intialize = UnityARMatrixOps.GetPosition(hitResult.worldTransform);
                     Penis_Mofo = temp.GetComponent<Spawner>().Intialize;
 
-                    temp.GetComponent<Spawner>().Intialize_Turnaround = new Vector3(Penis_Mofo.x + 0.25f, Penis_Mofo.y, Penis_Mofo.z -0.25f) ;
+                    temp.GetComponent<Spawner>().Intialize_Turnaround = new Vector3(Penis_Mofo.x + 0.25f, Penis_Mofo.y, Penis_Mofo.z - 0.25f);
                     temp.GetComponent<Spawner>().Build();
-                    
+
                     Debug.Log("Got hit!");
                     //m_HitTransform.position = UnityARMatrixOps.GetPosition(hitResult.worldTransform);
                     //m_HitTransform.rotation = UnityARMatrixOps.GetRotation(hitResult.worldTransform);
@@ -48,43 +49,47 @@ namespace UnityEngine.XR.iOS
             }
             return false;
         }
-       
+
         // Update is called once per frame
         void Update()
-        {  
+        {
 #if UNITY_IOS
 
             if (Input.touchCount > 0)
-			{
-				var touch = Input.GetTouch(0);
-				if (touch.phase == TouchPhase.Began || touch.phase == TouchPhase.Moved)
-				{
-					var screenPosition = Camera.main.ScreenToViewportPoint(touch.position);
-					ARPoint point = new ARPoint 
-                    {
-						x = screenPosition.x,
-						y = screenPosition.y
-					};
+            {
+                if (!EventSystem.current.IsPointerOverGameObject())
+                {
 
-                    // prioritize reults types
-                    ARHitTestResultType[] resultTypes = 
+                    var touch = Input.GetTouch(0);
+                    if (touch.phase == TouchPhase.Began || touch.phase == TouchPhase.Moved)
                     {
+                        var screenPosition = Camera.main.ScreenToViewportPoint(touch.position);
+                        ARPoint point = new ARPoint
+                        {
+                            x = screenPosition.x,
+                            y = screenPosition.y
+                        };
+
+                        // prioritize reults types
+                        ARHitTestResultType[] resultTypes =
+                        {
                         //ARHitTestResultType.ARHitTestResultTypeExistingPlaneUsingExtent, 
                         // if you want to use infinite planes use this:
                         ARHitTestResultType.ARHitTestResultTypeExistingPlane,
                         //ARHitTestResultType.ARHitTestResultTypeHorizontalPlane, 
                         //ARHitTestResultType.ARHitTestResultTypeFeaturePoint
-                    }; 
-					
-                    foreach (ARHitTestResultType resultType in resultTypes)
-                    {
-                        if (HitTestWithResultType (point, resultType))
+                        };
+
+                        foreach (ARHitTestResultType resultType in resultTypes)
                         {
-                            return;
+                            if (HitTestWithResultType(point, resultType))
+                            {
+                                return;
+                            }
                         }
                     }
-				}
-			}
+                }
+            }
 #endif
         }
 
