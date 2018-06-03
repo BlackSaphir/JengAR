@@ -32,11 +32,11 @@ namespace UnityEngine.XR.iOS
                     temp.GetComponent<Spawner>().Intialize = UnityARMatrixOps.GetPosition(hitResult.worldTransform);
                     temp_turnaround = temp.GetComponent<Spawner>().Intialize;
 
-                    temp.GetComponent<Spawner>().Intialize_Turnaround = new Vector3(temp_turnaround.x + (2.5f * Spawner.Temp_JengaCube.transform.localScale.x), temp_turnaround.y, temp_turnaround.z + (-2.5f * Spawner.Temp_JengaCube.transform.localScale.z));
-                    //temp.GetComponent<Spawner>().Build();
+                    //temp.GetComponent<Spawner>().Intialize_Turnaround = new Vector3(temp_turnaround.x + (2.5f * Spawner.Temp_JengaCube.transform.localScale.x), temp_turnaround.y, temp_turnaround.z + (-2.5f * Spawner.Temp_JengaCube.transform.localScale.z));
+                    temp.GetComponent<Spawner>().Intialize_Turnaround = new Vector3(temp_turnaround.x + 2.55f /*0.125f*/, temp_turnaround.y, temp_turnaround.z - 2.55f/* 0.125f*/);
+                    temp.GetComponent<Spawner>().Build();
                     Debug.Log("Got hit!");
                     return true;
-
                 }
             }
             return false;
